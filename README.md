@@ -50,6 +50,16 @@ Attributes
     <td><tt>"127.0.0.1"</tt></td>
   </tr>
   <tr>
+	<td><tt>[:ghost][:port]</tt></td>
+	<td>string</td>
+	<td><tt>"2368"</tt></td>
+  </tr>
+  <tr>
+	<td><tt>[:ghost][:install_path]</tt></td>
+	<td>string</td>
+	<td><tt>"/home/ghost"</tt></td>
+  </tr>
+  <tr>
 	<td><tt>[:ghost][:src_url]</tt></td>
 	<td>string</td>
 	<td><tt>"https://ghost.org/zip/ghost-0.5.0.zip"</tt></td>
@@ -60,8 +70,9 @@ Usage
 -----
 #### ghost-blog::default
 
-Set the user to execute, own, and run the instance of ghost.
-Then include `ghost-blog` in your node's `run_list`:
+Set the `user` to own and run the instance of ghost. Also set the
+`install_path` and `domain` variables if applicable. Finally include `ghost-blog`
+in a recipe or your node's `run_list`:
 
 ```json
 {
