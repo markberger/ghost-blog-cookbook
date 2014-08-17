@@ -1,0 +1,56 @@
+// # Ghost Configuration
+// Setup your Ghost install for various environments
+// Documentation can be found at http://support.ghost.org/config/
+
+var path = require('path'),
+    config;
+
+config = {
+    <% if @include_dev_config %>
+    // ### Development **(default)**
+    development: {
+        // The url to use when providing links to the site, E.g. in RSS and email.
+        url: 'http://<%= @url %>',
+
+        database: {
+            client: 'sqlite3',
+            connection: {
+                filename: path.join(__dirname, '<%= @sqlite_path_dev %>')
+            },
+            debug: false
+        },
+        server: {
+            // Host to be passed to node's `net.Server#listen()`
+            host: '<%= @blog_addr %>',
+            // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+            port: '<%= @blog_port %>'
+        },
+        paths: {
+            contentPath: path.join(__dirname, '/content/')
+        }
+    },
+    <% end %>
+    // ### Production
+    // When running Ghost in the wild, use the production environment
+    // Configure your URL and mail settings here
+    production: {
+        url: 'http://<%= @url %>',
+        mail: {},
+        database: {
+            client: 'sqlite3',
+            connection: {
+                filename: path.join(__dirname, '<%= @sqlite_path_prod %>')
+            },
+            debug: false
+        },
+        server: {
+            // Host to be passed to node's `net.Server#listen()`
+            host: '<%= @blog_addr %>',
+            // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
+            port: '<%= @blog_port %>'
+        }
+    },
+};
+
+// Export config
+module.exports = config;
